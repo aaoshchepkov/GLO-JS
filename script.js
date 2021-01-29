@@ -1,10 +1,10 @@
-let money = 500000;
+let money = 300000;
 let income = 'Инстаграмм';
 let addExpenses = 'Кино, кафе, спортзал';
 let deposit = true;
 let mission = 10000000;
 let period = 6;
-let budgetDay = 'доход за месяц/30';
+let budgetDay = money / 30;
 
 console.log(typeof money);
 console.log(typeof income);

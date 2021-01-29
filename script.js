@@ -7,5 +7,7 @@ let period;
 
 alert ('Привет!');
 console.log('Любой текст');
+// lesson01
+
 
 

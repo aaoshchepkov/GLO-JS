@@ -1,13 +1,10 @@
-let money;
-let income;
-let addExpenses;
-let deposit;
-let mission;
-let period;
+let money = 500000;
+let income = 'Инстаграмм';
+let addExpenses = 'Кино, кафе, спортзал';
+let deposit = true;
+let mission = 10000000;
+let period = 6;
 
-alert ('Привет!');
-console.log('Любой текст');
-// lesson01
 
 
 

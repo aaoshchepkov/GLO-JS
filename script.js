@@ -45,8 +45,9 @@ let accumulatedMonth =  getAccumulatedMonth ();
 
 
 function getTargetMonth () {
-  return (mission / accumulatedMonth);
+  return (mission / (accumulatedMonth + 0.0000000001));
 }
+
 
 getTargetMonth ();
 console.log('Период накопления ' + Math.ceil(getTargetMonth()) + ' мес.');

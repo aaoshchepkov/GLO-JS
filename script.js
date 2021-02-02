@@ -19,38 +19,36 @@ console.log(addExpenses.split(', '));
 console.log(budgetDay);
 
 money = prompt('Ваш месячный доход?');
-console.log(money);
+console.log('Ваш месячный доход: ' + money);
 
 addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую');
-console.log(addExpenses);
+console.log('Возможные расходы: ' + addExpenses);
 
-deposit = prompt('Есть ли у вас депозит в банке?');
-if (deposit.toLowerCase() === 'да'){
-  deposit = true;
-} else {
-  deposit = false;
-}
-console.log(deposit);
+deposit = confirm('Есть ли у вас депозит в банке?');
+
+console.log('Депозит в банке: ' +  deposit);
 
 let expenses1 = prompt('Введите обязательную статью расходов?');
-console.log(expenses1);
+console.log('Статья расходов №1: ' + expenses1);
 let eamount1 = +prompt('Во сколько это обойдется?');
-console.log(eamount1);
+console.log('Стоимость затрат №1: ' + eamount1);
 let expenses2 = prompt('Введите обязательную статью расходов?');
-console.log(expenses2);
+console.log('Статья расходов №1: ' + expenses2);
 let eamount2 = +prompt('Во сколько это обойдется?');
-console.log(eamount2);
+console.log('Стоимость затрат №1: ' + eamount2);
 
-let budgetMonth = eamount1 + eamount2;
-console.log(budgetMonth);
-period = mission / (money - budgetMonth);
-console.log(Math.ceil(period));
+let budgetMonth = money - (eamount1 + eamount2);
+console.log('Бюджет на месяц, учитывая расходы: ' +  budgetMonth);
+period = mission / budgetMonth;
+console.log('Колличество месяцев до цели: ' + Math.ceil(period));
 
-budgetDay = (money - budgetMonth) / 30;
-console.log(Math.floor(budgetDay));
+budgetDay = budgetMonth / 30;
+console.log('Дневной бюджет с вычетом обязательных расходов: ' + Math.floor(budgetDay));
 
 if (budgetDay < 0 ) {
   console.log('Что то пошло не так');
+} else if (budgetDay === 0) {
+  console.log('У вас низкий доход');   
 } else if (budgetDay <= 600){
   console.log('К сожалению у вас уровень дохода ниже среднего');
 } else if (budgetDay <= 1200) {

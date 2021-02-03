@@ -1,42 +1,62 @@
 'use strict';
+let isNumber = function(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+};
 
-let money = 300000;
-let income = 'Инстаграмм';
-let addExpenses = 'Кино, кафе, спортзал';
-let deposit = true;
-let mission = 10000000;
-let period = 6;
-let budgetDay = money / 30;
+let money,
+  income = 'Инстаграмм',
+  addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую'),
+  deposit = confirm('Есть ли у вас депозит в банке?'),
+  mission = 1000000,
+  period = 6,
+  budgetDay;
 
+let start = function (){
+  money = prompt('Ваш месячный доход?');
 
-let showTypeOf = function (data){
-  console.log(data, typeof(data));
+  while (!isNumber(money)) {
+    money = prompt('Ваш месячный доход?');
+  }
+};
+
+start();
+
+let showTypeOf = function (item){
+  console.log(typeof item);
 };
 
 showTypeOf(money);
 showTypeOf(income);
 showTypeOf(addExpenses);
 
-money = prompt('Ваш месячный доход?');
-addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую');
-console.log('Возможные расходы: ' + addExpenses);
-deposit = confirm('Есть ли у вас депозит в банке?');
+console.log('Возможные расходы: ' + addExpenses.toLocaleLowerCase().split(','));
 
-let expenses1 = prompt('Введите обязательную статью расходов?');
-let eamount1 = +prompt('Во сколько это обойдется?');
-let expenses2 = prompt('Введите обязательную статью расходов?');
-let eamount2 = +prompt('Во сколько это обойдется?');
-
+let expenses = []; 
 
 function getExpensesMonth () {
-  return (eamount1 + eamount2);
+  let sum = 0;
+  let sumIn;
+  for (let i = 0; i<2; i++) {
+
+    expenses[i] = prompt('Введите обязательную статью расходов?');
+   
+    sumIn = prompt('Во сколько это обойдется?');
+    while (!isNumber(sumIn)) {
+    sumIn = prompt('Во сколько это обойдется?');
+  }
+   sum += +sumIn ;
+  }
+   
+  return sum;
 }
-getExpensesMonth ();
-console.log('Сумма обязательных расхожов ' + getExpensesMonth ());
+
+
+let expensesAmount = getExpensesMonth ();
+console.log('Сумма обязательных расходов ' + expensesAmount);
 
 
 function getAccumulatedMonth () {
-  return (money - getExpensesMonth () );
+  return (money - expensesAmount);
 }
 getAccumulatedMonth ();
 
@@ -45,12 +65,15 @@ let accumulatedMonth =  getAccumulatedMonth ();
 
 
 function getTargetMonth () {
-  return (mission / (accumulatedMonth + 0.0000000001));
+  return (mission / (accumulatedMonth + 0.1));
 }
 
 
-getTargetMonth ();
-console.log('Период накопления ' + Math.ceil(getTargetMonth()) + ' мес.');
+if (getTargetMonth () > 0){
+console.log('Цель будет достигнута ' + Math.ceil(getTargetMonth()) + ' мес.');
+} else {
+  console.log('Цель не будет достигнута');
+} 
 
 budgetDay = accumulatedMonth / 30;
 console.log('Бюджет на день ' + Math.floor(budgetDay));
@@ -71,6 +94,3 @@ let getStatusIncome = function(){
 };
 
 console.log(getStatusIncome());
-
-
-

@@ -16,7 +16,7 @@ let start = function (){
   do {
   money = prompt('Ваш месячный доход?');
 
-  }while (!isNumber(money)) 
+  }while (!isNumber(money));
 };
 
 start();

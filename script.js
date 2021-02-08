@@ -24,7 +24,16 @@ let appData = {
     let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую');
         appData.addExpenses = 'Возможные расходы: ' + addExpenses.toLowerCase().split(',');
         appData.deposit = confirm('Есть ли у вас депозит в банке?');
-        
+        for (let i = 0; i<2; i++) {
+        let expenses;
+        let sum = 0;
+        expenses = prompt('Введите обязательную статью расходов?');
+        sum = prompt('Во сколько это обойдется?');
+        while (isNaN(parseFloat(sum)) && isFinite(sum)) {
+        sum = prompt('Во сколько это обойдется?');  
+        }
+        appData.expenses[expenses] = +sum;
+        }
   },
   bubget: money,
   budgetDay: 0,
@@ -32,25 +41,16 @@ let appData = {
   expensesMonth: 0,
 };
 
+
 appData.asking();
-let expenses1, expenses2; 
+
 appData.getExpensesMonth = function getExpensesMonth () {
    let sum = 0;
-   let sumIn = 0;
-   for (let i = 0; i<2; i++) { 
-     if (i === 0) {
-     expenses1 = prompt('Введите обязательную статью расходов?');
-     } else if (i === 1) {
-     expenses2 = prompt('Введите обязательную статью расходов?');
-     }
-    sumIn=prompt('Во сколько это обойдется?');
-    while (isNaN(parseFloat(sumIn)) && isFinite(sumIn)) {
-    sumIn=prompt('Во сколько это обойдется?');  
-    }
-    sum+= +sumIn;
-   }   
+   for (const property in appData.expenses) {
+   sum+= appData.expenses[property];
+  }
    return sum;
- };
+  }
 
 let expensesAmount = appData.getExpensesMonth ();
 console.log('Сумма обязательных расходов ' + expensesAmount);
@@ -59,13 +59,17 @@ console.log('Сумма обязательных расходов ' + expensesAm
 appData.getAccumulatedMonth = function getAccumulatedMonth () {
   return (money - expensesAmount);
 };
+
+
 appData.getAccumulatedMonth();
 
-let accumulatedMonth =  appData.getAccumulatedMonth();
+
+
+let getBudget =  appData.getAccumulatedMonth();
 
 
 appData.getTargetMonth = function getTargetMonth () {
-  return (appData.mission / (accumulatedMonth + 0.1));
+  return (appData.mission / (getBudget + 0.1));
 };
 
 
@@ -75,7 +79,7 @@ console.log('Цель будет достигнута ' + Math.ceil(appData.getT
   console.log('Цель не будет достигнута');
 } 
 
-let budgetDay = accumulatedMonth / 30;
+let budgetDay = getBudget / 30;
 console.log('Бюджет на день ' + Math.floor(budgetDay));
 
 
@@ -94,3 +98,6 @@ appData.getStatusIncome = function getStatusIncome(){
 };
 
 console.log(appData.getStatusIncome());
+for (let key in appData) {
+  console.log('Наша программа включает в себя данные:' + key + ': ' + appData[key]);
+};

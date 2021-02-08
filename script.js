@@ -70,7 +70,7 @@ let appData = {
 };
 
 appData.asking();
-console.log("расходы за месяц: " + appData.getExpensesMonth());
+console.log("Расходы за месяц: " + appData.getExpensesMonth());
 appData.getBudget();
 appData.getTargetMonth();
 console.log(appData.getStatusIncome());

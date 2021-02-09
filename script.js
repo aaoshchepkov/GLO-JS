@@ -27,19 +27,28 @@ let appData = {
   budgetMonth: 0,
   expensesMonth: 0,
   asking: function () {
-    if (confirm('У вас есть дополнительный заработок?')) {
+
+     if (confirm('У вас есть дополнительный заработок?')) {
       let itemIncome = prompt('Какой у вас дополнительный заработок', 'Таксую');
+      if ( itemIncome === null) {
+      appData.asking();
+      }
       while (isFinite(itemIncome)){
       itemIncome = prompt('Какой у вас дополнительный заработок', 'Таксую');}
+
       let cashIncome = prompt('Сколько в месяц приносит дополнительный доход?', 10000);
+      if (cashIncome === null) {
+      appData.asking();
+      }
       while (!isNumber(cashIncome)) {
       cashIncome = prompt('Сколько в месяц приносит дополнительный доход?', 10000);}
+      
       appData.income[itemIncome] = cashIncome;
-    }
+      }
 
     let addExpenses = prompt('Возможные расходы за рассчитываемый период через запятую', 'еда, вОда, похОд в кино');
     while (isFinite(addExpenses)){
-      addExpenses = prompt('Возможные расходы за рассчитываемый период через запятую', 'еда, вОда, похОд в кино');}
+    addExpenses = prompt('Возможные расходы за рассчитываемый период через запятую', 'еда, вОда, похОд в кино');}
     appData.addExpenses = addExpenses.toLowerCase().split(',');
     appData.addExpenses = appData.addExpenses.map(function(item) {
       return item.trim();
@@ -49,12 +58,22 @@ let appData = {
     });
     console.log(appData.addExpenses.join(', '));
     appData.deposit = confirm('Есть ли у вас депозит в банке?');
+    if(appData.deposit) {
+      do {
+      appData.precentDeposit = prompt('Какой процент по депозиту?', '10');
+      }
+      while (!isNumber(appData.precentDeposit)); 
+      do {
+      appData.moneyDeposit = prompt('Какая сумма депозита?', 10000);
+      }
+      while (!isNumber(appData.moneyDeposit)); 
+    }
     for (let i = 0; i < 2; i++) {
       let expenses;
       let sum = 0;
-      expenses = prompt('Введите обязательную статью расходов?', 'еда,вОда,пивО');
+      expenses = prompt('Введите обязательную статью расходов?', 'еда,вОда');
       while (isFinite(expenses)){
-      expenses = prompt('Введите обязательную статью расходов?', 'Еда,вОда,пивО');}
+      expenses = prompt('Введите обязательную статью расходов?', 'Еда,вОда');}
       do {
       sum = prompt('Во сколько это обойдется?', 500);
       }
@@ -92,24 +111,13 @@ let appData = {
       return ('У вас высокий уровень дохода');
     }
   },
-  getInfoDeposit: function(){
-    if(appData.deposit) {
-      do {
-      appData.precentDeposit = prompt('Какой процент по депозиту?', '10');
-      }
-      while (!isNumber(appData.precentDeposit)); 
-      do {
-      appData.moneyDeposit = prompt('Какая сумма депозита?', 10000);
-      }
-      while (!isNumber(appData.moneyDeposit)); 
-    }
-  },
   calcSavedMoney: function() { 
     return appData.budgetMonth * appData.period;
   },
 }; 
 
 appData.asking();
+appData.getExpensesMonth();
 console.log("Расходы за месяц: " + appData.getExpensesMonth());
 appData.getBudget();
 appData.getTargetMonth();

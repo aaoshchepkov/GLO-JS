@@ -12,6 +12,32 @@ let start = function () {
 
 start();
 
+const buttonStart = document.getElementById('start');
+const buttonPlusIncome = document.getElementsByTagName('button')[0];
+const buttonPlusExpenses = document.getElementsByTagName('button')[1];
+const checkbox = document.querySelector('#deposit-check');
+const inputAdditionalIncomeItem1 = document.querySelectorAll('.additional_income-item')[0];
+const inputAdditionalIncomeItem2 = document.querySelectorAll('.additional_income-item')[1];
+const valueBudgetMonth = document.getElementsByClassName('budget_month-value');
+const valueBudgetDay = document.getElementsByClassName('budget_day-value');
+const valueExpensesMonth = document.getElementsByClassName('expenses_month-value');
+const valueAdditionalIncome = document.getElementsByClassName('additional_income-value');
+const valueAdditionalExpenses = document.getElementsByClassName('additional_expenses-value');
+const valueIncomePeriod = document.getElementsByClassName('income_period-value');
+const valueTargetMonth = document.getElementsByClassName('target_month-value');
+const inputSalaryAmount = document.querySelector('.salary-amount');
+const inputIncomeTitle = document.querySelector('.income-items .income-title');
+const inputIncomeAmount = document.querySelector('.income-amount');
+const inputExpensesTitle = document.querySelector('.expenses-items .expenses-title');
+const inputExpensesAmount = document.querySelector('.expenses-amount');
+const inputAdditionalExpensesItem = document.querySelector('.additional_expenses-item');
+const inputTargetAmount = document.querySelector('.target-amount');
+const inputPeriodSelect = document.querySelector('.period-select');
+
+
+
+
+
 let appData = {
   income: {},
   addIncome: [],

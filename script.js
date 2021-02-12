@@ -23,6 +23,9 @@ let inputPeriodSelect = document.querySelector('.period-select');
 let incomeItems = document.querySelectorAll('.income-items');
 let periodAmount  = document.querySelector('.period-amount');
 
+
+
+
 let appData = {
   budget: 0,
   budgetDay: 0,
@@ -37,11 +40,15 @@ let appData = {
   precentDeposit: 0,
   moneyDeposit: 0,
   
+  startOff: function(){
+    if(inputSalaryAmount.value === '') {
+    start.disabled = true;
+    } else {start.disabled = false;}
+
+  },
+  
   start: function () {
-    if(inputSalaryAmount.value === ''){
-      alert('Ошибка, поле "Месячный доход" должно быть заполнено, введите цифры!');
-      return;
-    }
+    
     appData.budget = +inputSalaryAmount.value;
     appData.getExpenses();
     appData.getIncome();
@@ -54,12 +61,11 @@ let appData = {
     appData.showResult();
   },
 
+  
   changePeriod(){
     periodAmount.textContent = inputPeriodSelect.value;
   },
   
-  
-
   showResult: function() {
      valueBudgetMonth.value = appData.budgetMonth;
      valueBudgetDay.value = appData.budgetDay;
@@ -68,9 +74,12 @@ let appData = {
      valueAdditionalIncome.value = appData.addIncome.join(', ');
      valueTargetMonth.value = Math.ceil(appData.getTargetMonth());
      valueIncomePeriod.value = appData.calcPeriod();
+     inputPeriodSelect.addEventListener('mousemove', function(){
+       valueIncomePeriod.value = appData.calcPeriod();
+     });
+
   },
   
-
   addExpensesBlock: function(){
     let cloneExpensesItem = expensesItems[0].cloneNode(true);
     expensesItems[0].parentNode.insertBefore(cloneExpensesItem, buttonPlusExpenses);
@@ -155,11 +164,15 @@ let appData = {
   calcPeriod: function () {
     return appData.budgetMonth * inputPeriodSelect.value;
   },
+
 };
 
+document.addEventListener('mouseover', appData.startOff);     
 start.addEventListener('click', appData.start);
 buttonPlusExpenses.addEventListener('click', appData.addExpensesBlock);
 buttonPlusIncome.addEventListener('click', appData.addIncomeBlock);
 inputPeriodSelect.addEventListener('mousemove', appData.changePeriod);
 
-//periodAmount.textContent = inputPeriodSelect.value;
+
+
+

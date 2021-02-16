@@ -53,17 +53,17 @@ let appData = {
 
   start: function () {
 
-    appData.budget = +inputSalaryAmount.value;
-    appData.getExpenses();
-    appData.getIncome();
-    appData.getExpensesMonth();
-    appData.getAddIncome();
-    appData.getAddExpenses();
+    this.budget = +inputSalaryAmount.value;
+    this.getExpenses();
+    this.getIncome();
+    this.getExpensesMonth();
+    this.getAddIncome();
+    this.getAddExpenses();
 
-    appData.getBudget();
+    this.getBudget();
 
-    appData.showResult();
-    appData.blockked();
+    this.showResult();
+    this.blockked();
 
 
   },
@@ -73,20 +73,20 @@ let appData = {
     allInputLeft.forEach(i => i.removeAttribute('disabled', 'disabled'));
     let allInput = document.querySelectorAll('input');
     allInput.forEach(i => i.value = '');
-    appData.budget = 0;
-    appData.budgetDay = 0;
-    appData.budgetMonth = 0;
-    appData.income = {};
-    appData.incomeMonth = 0;
-    appData.addIncome = [];
-    appData.expenses = {};
-    appData.expensesMonth = 0;
-    appData.addExpenses = [];
-    appData.deposit = false;
-    appData.precentDeposit = 0;
-    appData.moneyDeposit = 0;
+   this.budget = 0;
+   this.budgetDay = 0;
+   this.budgetMonth = 0;
+   this.income = {};
+   this.incomeMonth = 0;
+   this.addIncome = [];
+   this.expenses = {};
+   this.expensesMonth = 0;
+   this.addExpenses = [];
+   this.deposit = false;
+   this.precentDeposit = 0;
+   this.moneyDeposit = 0;
     inputPeriodSelect.value = 1;
-    appData.changePeriod();
+   this.changePeriod();
      if (expensesItems.length === 2) {
       expensesItems[1].remove();
     } else if (expensesItems.length === 3) {
@@ -220,14 +220,14 @@ let appData = {
     }
   },
   calcPeriod: function () {
-    return appData.budgetMonth * inputPeriodSelect.value;
+    return this.budgetMonth * inputPeriodSelect.value;
   },
 
 };
 
 document.addEventListener('mouseover', appData.startOff);
-start.addEventListener('click', appData.start);
+start.addEventListener('click', appData.start.bind(appData));
 buttonPlusExpenses.addEventListener('click', appData.addExpensesBlock);
 buttonPlusIncome.addEventListener('click', appData.addIncomeBlock);
 inputPeriodSelect.addEventListener('mousemove', appData.changePeriod);
-btnReset.addEventListener('click', appData.reset);
+btnReset.addEventListener('click', appData.reset.bind(appData));

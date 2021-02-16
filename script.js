@@ -87,15 +87,15 @@ let appData = {
     appData.moneyDeposit = 0;
     inputPeriodSelect.value = 1;
     appData.changePeriod();
-     if (expensesItems.length === 1) {
+     if (expensesItems.length === 2) {
       expensesItems[1].remove();
-    } else if (expensesItems.length > 2) {
+    } else if (expensesItems.length === 3) {
       expensesItems[1].remove();
       expensesItems[2].remove();
     }
-    if (incomeItems.length === 1) {
+    if (incomeItems.length === 2  ) {
       incomeItems[1].remove();
-    } else if (incomeItems.length > 2) {
+    } else if (incomeItems.length === 3) {
       incomeItems[1].remove();
       incomeItems[2].remove();
     } 

@@ -73,32 +73,28 @@ let appData = {
     allInputLeft.forEach(i => i.removeAttribute('disabled', 'disabled'));
     let allInput = document.querySelectorAll('input');
     allInput.forEach(i => i.value = '');
-   this.budget = 0;
-   this.budgetDay = 0;
-   this.budgetMonth = 0;
-   this.income = {};
-   this.incomeMonth = 0;
-   this.addIncome = [];
-   this.expenses = {};
-   this.expensesMonth = 0;
-   this.addExpenses = [];
-   this.deposit = false;
-   this.precentDeposit = 0;
-   this.moneyDeposit = 0;
+    depositCheck.checked = false;
+
+    this.budget = 0;
+    this.budgetDay = 0;
+    this.budgetMonth = 0;
+    this.income = {};
+    this.incomeMonth = 0;
+    this.addIncome = [];
+    this.expenses = {};
+    this.expensesMonth = 0;
+    this.addExpenses = [];
+    this.deposit = false;
+    this.precentDeposit = 0;
+    this.moneyDeposit = 0;
     inputPeriodSelect.value = 1;
-   this.changePeriod();
-     if (expensesItems.length === 2) {
-      expensesItems[1].remove();
-    } else if (expensesItems.length === 3) {
-      expensesItems[1].remove();
-      expensesItems[2].remove();
+    this.changePeriod();
+    for (let i = 1; expensesItems.length > i; i++){
+      expensesItems[i].remove();
     }
-    if (incomeItems.length === 2  ) {
-      incomeItems[1].remove();
-    } else if (incomeItems.length === 3) {
-      incomeItems[1].remove();
-      incomeItems[2].remove();
-    } 
+    for (let i = 1; incomeItems.length > i; i++){
+      incomeItems[i].remove();
+    }
     buttonPlusIncome.style.display = 'block';
     buttonPlusExpenses.style.display = 'block';
     start.style.display = 'block';

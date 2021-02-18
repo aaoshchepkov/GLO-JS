@@ -214,11 +214,11 @@ class AppData {
   eventListeners() {
 
     document.addEventListener('mouseover', this.startOff);
-    start.addEventListener('click', this.start.bind(appData));
+    start.addEventListener('click', this.start.bind(this));
     buttonPlusExpenses.addEventListener('click', this.addExpensesBlock);
     buttonPlusIncome.addEventListener('click', this.addIncomeBlock);
     inputPeriodSelect.addEventListener('mousemove', this.changePeriod);
-    btnReset.addEventListener('click', this.reset.bind(appData));
+    btnReset.addEventListener('click', this.reset.bind(this));
 
   }
 
@@ -228,3 +228,5 @@ const appData = new AppData();
 
 
 appData.eventListeners();
+
+
